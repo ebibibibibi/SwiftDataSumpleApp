@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3065BC032B4473B800D22200 /* SwiftDataSumpleAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC022B4473B800D22200 /* SwiftDataSumpleAppApp.swift */; };
+		3065BC032B4473B800D22200 /* SwiftDataSumpleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC022B4473B800D22200 /* SwiftDataSumpleApp.swift */; };
 		3065BC052B4473B800D22200 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC042B4473B800D22200 /* ContentView.swift */; };
 		3065BC072B4473B800D22200 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC062B4473B800D22200 /* Item.swift */; };
 		3065BC092B4473B900D22200 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3065BC082B4473B900D22200 /* Assets.xcassets */; };
@@ -15,6 +15,13 @@
 		3065BC162B4473B900D22200 /* SwiftDataSumpleAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC152B4473B900D22200 /* SwiftDataSumpleAppTests.swift */; };
 		3065BC202B4473B900D22200 /* SwiftDataSumpleAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC1F2B4473B900D22200 /* SwiftDataSumpleAppUITests.swift */; };
 		3065BC222B4473B900D22200 /* SwiftDataSumpleAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC212B4473B900D22200 /* SwiftDataSumpleAppUITestsLaunchTests.swift */; };
+		3065BC2F2B44741100D22200 /* MessageSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC2E2B44741100D22200 /* MessageSender.swift */; };
+		3065BC312B44741E00D22200 /* CommonMessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC302B44741E00D22200 /* CommonMessageAPI.swift */; };
+		3065BC322B44749500D22200 /* CommonMessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC302B44741E00D22200 /* CommonMessageAPI.swift */; };
+		3065BC332B44749900D22200 /* MessageSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC2E2B44741100D22200 /* MessageSender.swift */; };
+		3065BC342B44749B00D22200 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC062B4473B800D22200 /* Item.swift */; };
+		3065BC362B4474FA00D22200 /* MessageInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC352B4474FA00D22200 /* MessageInputValidator.swift */; };
+		3065BC372B4474FA00D22200 /* MessageInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC352B4474FA00D22200 /* MessageInputValidator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		3065BBFF2B4473B800D22200 /* SwiftDataSumpleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDataSumpleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3065BC022B4473B800D22200 /* SwiftDataSumpleAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSumpleAppApp.swift; sourceTree = "<group>"; };
+		3065BC022B4473B800D22200 /* SwiftDataSumpleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSumpleApp.swift; sourceTree = "<group>"; };
 		3065BC042B4473B800D22200 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3065BC062B4473B800D22200 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		3065BC082B4473B900D22200 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,6 +53,9 @@
 		3065BC1B2B4473B900D22200 /* SwiftDataSumpleAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftDataSumpleAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3065BC1F2B4473B900D22200 /* SwiftDataSumpleAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSumpleAppUITests.swift; sourceTree = "<group>"; };
 		3065BC212B4473B900D22200 /* SwiftDataSumpleAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataSumpleAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3065BC2E2B44741100D22200 /* MessageSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSender.swift; sourceTree = "<group>"; };
+		3065BC302B44741E00D22200 /* CommonMessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMessageAPI.swift; sourceTree = "<group>"; };
+		3065BC352B4474FA00D22200 /* MessageInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputValidator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +106,12 @@
 		3065BC012B4473B800D22200 /* SwiftDataSumpleApp */ = {
 			isa = PBXGroup;
 			children = (
-				3065BC022B4473B800D22200 /* SwiftDataSumpleAppApp.swift */,
+				3065BC022B4473B800D22200 /* SwiftDataSumpleApp.swift */,
 				3065BC042B4473B800D22200 /* ContentView.swift */,
 				3065BC062B4473B800D22200 /* Item.swift */,
+				3065BC2E2B44741100D22200 /* MessageSender.swift */,
+				3065BC352B4474FA00D22200 /* MessageInputValidator.swift */,
+				3065BC302B44741E00D22200 /* CommonMessageAPI.swift */,
 				3065BC082B4473B900D22200 /* Assets.xcassets */,
 				3065BC0A2B4473B900D22200 /* Preview Content */,
 			);
@@ -260,9 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3065BC2F2B44741100D22200 /* MessageSender.swift in Sources */,
 				3065BC052B4473B800D22200 /* ContentView.swift in Sources */,
+				3065BC312B44741E00D22200 /* CommonMessageAPI.swift in Sources */,
 				3065BC072B4473B800D22200 /* Item.swift in Sources */,
-				3065BC032B4473B800D22200 /* SwiftDataSumpleAppApp.swift in Sources */,
+				3065BC032B4473B800D22200 /* SwiftDataSumpleApp.swift in Sources */,
+				3065BC362B4474FA00D22200 /* MessageInputValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,7 +286,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3065BC342B44749B00D22200 /* Item.swift in Sources */,
+				3065BC372B4474FA00D22200 /* MessageInputValidator.swift in Sources */,
 				3065BC162B4473B900D22200 /* SwiftDataSumpleAppTests.swift in Sources */,
+				3065BC332B44749900D22200 /* MessageSender.swift in Sources */,
+				3065BC322B44749500D22200 /* CommonMessageAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
