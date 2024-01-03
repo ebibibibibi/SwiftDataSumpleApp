@@ -41,11 +41,6 @@ struct ContentView: View {
         }
     }
     
-    private func addItem() {
-        let newItem = Item(timestamp: Date())
-        modelContext.insert(newItem)
-    }
-    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -57,7 +52,8 @@ struct ContentView: View {
 
 
 struct MessageEntryView: View {
-    @State private var message = ""
+    @Environment(\.modelContext) private var modelContext
+    @State private var message: String = ""
     @State private var image = ""
     var body: some View {
         VStack {
@@ -66,11 +62,18 @@ struct MessageEntryView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             Text("🍓\(message)🍓")
+            Button(action: addItem) {
+                Label("Add Item", systemImage: "plus")
+            }
             Spacer()
             TextField(" ", text: $image)
                 .padding()
             Text("🍇\(image)🍇")
         }
+    }
+    private func addItem() {
+        var newItem = Item(timestamp: Date(), message: message, image: image)
+        modelContext.insert(newItem)
     }
 }
 
