@@ -11,8 +11,12 @@ import SwiftData
 @Model
 final class Item {
     var timestamp: Date
+//    var message: String
+//    var image: String
     
     init(timestamp: Date) {
         self.timestamp = timestamp
+//        self.message = ""
+//        self.image = ""
     }
 }
