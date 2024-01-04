@@ -8,13 +8,19 @@
 import Foundation
 import SwiftData
 
-enum ItemSchemaV1: VersionedSchema {
+//@Model
+//final class Item {
+//    var timestamp: Date
+//    
+//    init(timestamp: Date) {
+//        self.timestamp = timestamp
+//    }
+//}
+struct ItemSchemaV1: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
     static var models: [any PersistentModel.Type] {
         [Item.self]
     }
-}
-extension ItemSchemaV1 {
     @Model
     final class Item {
         var timestamp: Date
@@ -24,29 +30,50 @@ extension ItemSchemaV1 {
     }
 }
 
-enum ItemSchemaV2: VersionedSchema {
+
+struct ItemSchemaV2: VersionedSchema {
     static var versionIdentifier = Schema.Version(2, 0, 0)
     static var models: [any PersistentModel.Type] {
         [Item.self]
     }
-}
-extension ItemSchemaV2 {
     @Model
     final class Item {
-        var timestamp: Date
-        var message: String
-        var image: String
-        
-        init(timestamp: Date, message: String, image: String) {
+        @Attribute(.unique) var timestamp: Date
+        //        var message: String
+        //        var image: String
+        init(timestamp: Date) {
             self.timestamp = timestamp
-            self.message = message
-            self.image = image
+        }
+        //        init(timestamp: Date, message: String, image: String) {
+        //            self.timestamp = timestamp
+        //            self.message = message
+        //            self.image = image
+        //        }
+    }
+}
+
+struct ItemSchemaV3: VersionedSchema {
+    static var versionIdentifier = Schema.Version(3, 0, 0)
+    static var models: [any PersistentModel.Type] {
+        [Item.self]
+    }
+    @Model
+    final class Item {
+        @Attribute(.unique) var timestamp: Date
+        var isFlagged: Bool = false
+        init(timestamp: Date) {
+            self.timestamp = timestamp
+        }
+        init(timestamp: Date, isFlagged: Bool = false) {
+            self.timestamp = timestamp
+            self.isFlagged = isFlagged
         }
     }
 }
 
+
 // Itemが常に最新バージョンを指すように型エイリアスを追加する
-typealias Item = ItemSchemaV1.Item
+typealias Item = ItemSchemaV3.Item
 
 // マイグレーションプランを作成する。
 // 一つの特定のバージョンから別のバージョンに移動する方法を定義する
@@ -54,28 +81,42 @@ typealias Item = ItemSchemaV1.Item
 enum ItemMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {
         // バージョンの順番に配置することで、SwiftDataが順序正しくバージョン間を移行できるようにする
-        [ItemSchemaV1.self, ItemSchemaV2.self]
+        [ItemSchemaV1.self, ItemSchemaV2.self, ItemSchemaV3.self]
     }
     
     static var stages: [MigrationStage] {
-        [migrateV1toV2]
+        [migrateV1toV2, migrateV2toV3]
     }
-    
-    // これまでに定義した2つのバージョン付きスキーマの配列を追加する。
-    static let migrateV1toV2 = MigrationStage.custom(
+    static let migrateV1toV2 = MigrationStage.lightweight(
         fromVersion: ItemSchemaV1.self,
-        toVersion: ItemSchemaV2.self,
-        willMigrate: { context in
-            print("migrateV1toV2.willMigrate()")
-        },
-        didMigrate: {
-            context in
-            let oldItems = try context.fetch(FetchDescriptor<ItemSchemaV1.Item>())
-            for oldItem in oldItems {
-                let newItem = ItemSchemaV2.Item(timestamp: oldItem.timestamp, message: "", image: "")
-                context.insert(newItem)
-            }
-            try context.save()
-        }
+        toVersion: ItemSchemaV2.self
     )
+    static let migrateV2toV3 = MigrationStage.custom(
+        
+        fromVersion: ItemSchemaV2.self,
+        toVersion: ItemSchemaV3.self,
+        willMigrate: nil
+    )
+    { context in
+        let items = try? context.fetch(FetchDescriptor<ItemSchemaV3.Item>())
+        
+        items?.forEach { item in
+            item.isFlagged = false
+        }
+        
+        try? context.save()
+    }
+    //    // これまでに定義した2つのバージョン付きスキーマの配列を追加する。
+    //    static let migrateV1toV2 = MigrationStage.custom(
+    //        fromVersion: ItemSchemaV1.self,
+    //        toVersion: ItemSchemaV2.self,
+    //        willMigrate: nil
+    //    ) { context in
+    //        let items = try? context.fetch(FetchDescriptor<ItemSchemaV2.Item>())
+    //        items?.forEach { item in
+    //            item.message = ""
+    //            item.image = ""
+    //        }
+    //        try context.save()
+    //    }
 }
