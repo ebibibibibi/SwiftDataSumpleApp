@@ -7,17 +7,15 @@
 
 import SwiftUI
 import SwiftData
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
-    
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("\(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
                         Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
@@ -29,9 +27,7 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    NavigationLink {
-                        MessageEntryView()
-                    } label: {
+                    Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
@@ -40,7 +36,12 @@ struct ContentView: View {
             Text("Select an item")
         }
     }
-    
+    private func addItem() {
+        withAnimation {
+            let newItem = Item(timestamp: Date())
+            modelContext.insert(newItem)
+        }
+    }
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -49,34 +50,6 @@ struct ContentView: View {
         }
     }
 }
-
-
-struct MessageEntryView: View {
-    @Environment(\.modelContext) private var modelContext
-    @State private var message: String = ""
-    @State private var image = ""
-    var body: some View {
-        VStack {
-            Spacer().frame(height: 100)
-            TextField(" ", text: $message)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            Text("🍓\(message)🍓")
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
-            }
-            Spacer()
-            TextField(" ", text: $image)
-                .padding()
-            Text("🍇\(image)🍇")
-        }
-    }
-    private func addItem() {
-        var newItem = Item(timestamp: Date(), message: message, image: image)
-        modelContext.insert(newItem)
-    }
-}
-
 #Preview {
     ContentView()
         .modelContainer(for: Item.self, inMemory: true)
