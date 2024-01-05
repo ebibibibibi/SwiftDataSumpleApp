@@ -11,7 +11,7 @@ import SwiftData
 //@Model
 //final class Item {
 //    var timestamp: Date
-//    
+//
 //    init(timestamp: Date) {
 //        self.timestamp = timestamp
 //    }
@@ -60,13 +60,12 @@ struct ItemSchemaV3: VersionedSchema {
     @Model
     final class Item {
         @Attribute(.unique) var timestamp: Date
-        var isFlagged: Bool = false
-        init(timestamp: Date) {
+        var message: String = ""
+        var image: String = ""
+        init(timestamp: Date, message: String = "", image: String = "") {
             self.timestamp = timestamp
-        }
-        init(timestamp: Date, isFlagged: Bool = false) {
-            self.timestamp = timestamp
-            self.isFlagged = isFlagged
+            self.message = message
+            self.image = image
         }
     }
 }
@@ -81,6 +80,7 @@ typealias Item = ItemSchemaV3.Item
 enum ItemMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {
         // バージョンの順番に配置することで、SwiftDataが順序正しくバージョン間を移行できるようにする
+//        [ItemSchemaV1.self, ItemSchemaV2.self]
         [ItemSchemaV1.self, ItemSchemaV2.self, ItemSchemaV3.self]
     }
     
@@ -101,7 +101,8 @@ enum ItemMigrationPlan: SchemaMigrationPlan {
         let items = try? context.fetch(FetchDescriptor<ItemSchemaV3.Item>())
         
         items?.forEach { item in
-            item.isFlagged = false
+            item.message = "🍓"
+            item.image = ""
         }
         
         try? context.save()
