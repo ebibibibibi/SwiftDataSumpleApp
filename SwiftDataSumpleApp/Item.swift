@@ -8,14 +8,6 @@
 import Foundation
 import SwiftData
 
-//@Model
-//final class Item {
-//    var timestamp: Date
-//
-//    init(timestamp: Date) {
-//        self.timestamp = timestamp
-//    }
-//}
 struct ItemSchemaV1: VersionedSchema {
     static var versionIdentifier = Schema.Version(1, 0, 0)
     static var models: [any PersistentModel.Type] {
