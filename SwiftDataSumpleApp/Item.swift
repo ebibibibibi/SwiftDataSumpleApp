@@ -70,14 +70,13 @@ enum ItemMigrationPlan: SchemaMigrationPlan {
     static var stages: [MigrationStage] {
         [migrateV1toV2, migrateV2toV3]
     }
-    
+    // 簡易的なマイグレーション。V1toV2の時は、一意制約をつけただけなので、lightweightで十分。
     static let migrateV1toV2 = MigrationStage.lightweight(
         fromVersion: ItemSchemaV1.self,
         toVersion: ItemSchemaV2.self
     )
-    
+    // カスタムマイグレーション。V2toV3時は messageとitemが追加されているため、旧バージョンの際の扱いを定義する。
     static let migrateV2toV3 = MigrationStage.custom(
-        
         fromVersion: ItemSchemaV2.self,
         toVersion: ItemSchemaV3.self,
         willMigrate: nil
