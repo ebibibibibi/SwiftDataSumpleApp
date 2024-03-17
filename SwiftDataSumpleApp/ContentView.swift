@@ -10,17 +10,16 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var peaple: [Person]
+    @Query private var community: [Community]
+    @Query private var communityRelationship: [CommunityRelationship]
+    @State private var selection: Person?
+    
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                        Text("Item at \(item.message)")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+            List(selection: $selection) {
+                ForEach(peaple) { person in
+                    ListItem(person: person)
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -34,101 +33,38 @@ struct ContentView: View {
                     }
                 }
             }
-        } detail: {
-            Text("Select an item")
+        } 
+    detail: {
+        if let selection = selection {
+            NavigationStack {
+                let community = community.filter { community in
+                    community.member.contains(where: { $0 == selection })
+                }
+                let communityRelationship = communityRelationship.filter { community in
+                    community.person1 == selection }
+                DetailView(person: selection, community: community, communityRelationship: communityRelationship)
+                }
+            }
+        }
+        .task {
+            if peaple.isEmpty {
+                Person.insertSampleData(modelContext: modelContext)
+            }
         }
     }
     private func addItem() {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            print("💐")
+//            let newItem = Item(timestamp: Date())
+//            modelContext.insert(newItem)
         }
     }
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
-}
-
-//struct ContentView: View {
-//    @Environment(\.modelContext) private var modelContext
-//    @Query private var items: [Item]
-//    
-//    var body: some View {
-//        NavigationSplitView {
-//            List {
-//                ForEach(items) { item in
-//                    NavigationLink {
-//                        Text("\(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-//                        Text("\(item.message)")
-//                        Text("\(item.image)")
-//                    } label: {
-//                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-//                    }
-//                }
-//                .onDelete(perform: deleteItems)
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    EditButton()
-//                }
-//                ToolbarItem {
-//                    NavigationLink {
-//                        MessageEntryView()
-//                    } label: {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
-//            }
-//        } detail: {
-//            Text("Select an item")
-//        }
-//    }
-//    
-//    private func deleteItems(offsets: IndexSet) {
-//        withAnimation {
+            print("🌷")
 //            for index in offsets {
 //                modelContext.delete(items[index])
 //            }
-//        }
-//    }
-//}
-//
-//
-//struct MessageEntryView: View {
-//    @Environment(\.modelContext) private var modelContext
-//    @State private var message: String = ""
-//    @State private var image = ""
-//    var body: some View {
-//        VStack {
-//            Spacer().frame(height: 100)
-//            TextField(" ", text: $message)
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                .padding()
-//            Text("🍓\(message)🍓")
-//            Button(action: addItem) {
-//                Label("Add Item", systemImage: "plus")
-//            }
-//            Spacer()
-//            TextField(" ", text: $image)
-//                .padding()
-//            Text("🍇\(image)🍇")
-//        }
-//    }
-//    private func addItem() {
-//        var newItem = Item(timestamp: Date(), message: message, image: image)
-//        modelContext.insert(newItem)
-//    }
-//}
-//
-//#Preview {
-//    ContentView()
-//        .modelContainer(for: Item.self, inMemory: true)
-//}
+        }
+    }
+}
