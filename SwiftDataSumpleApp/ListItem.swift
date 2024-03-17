@@ -7,30 +7,26 @@
 
 import SwiftUI
 
-struct ListItem: View {
-    var person: Person
-    
+struct MessageItem: View {
+    var message: Message
     var body: some View {
-        NavigationLink(value: person) {
+        NavigationLink(value: message) {
             HStack {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.pink)
                     .frame(width: 64, height: 64)
                     .overlay {
-                        Text(person.name)
+                        Text("")
                             .font(.system(size: 48))
                             .foregroundStyle(.background)
                     }
                     .padding(.trailing)
                 
                 VStack(alignment: .leading) {
-                    Text(person.name)
+                    Text("")
                         .font(.headline)
                 }
             }
         }
     }
-}
-#Preview {
-    ListItem(person: .hitomi)
 }

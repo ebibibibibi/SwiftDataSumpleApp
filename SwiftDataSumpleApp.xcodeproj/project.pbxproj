@@ -23,8 +23,6 @@
 		3065BC362B4474FA00D22200 /* MessageInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC352B4474FA00D22200 /* MessageInputValidator.swift */; };
 		3065BC372B4474FA00D22200 /* MessageInputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3065BC352B4474FA00D22200 /* MessageInputValidator.swift */; };
 		306C41632B8AC45E00291EDF /* ListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C41622B8AC45E00291EDF /* ListItem.swift */; };
-		306C41652B8AC5CD00291EDF /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C41642B8AC5CD00291EDF /* DetailView.swift */; };
-		306C41692B8AC8FC00291EDF /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 306C41682B8AC8FC00291EDF /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +58,6 @@
 		3065BC302B44741E00D22200 /* CommonMessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonMessageAPI.swift; sourceTree = "<group>"; };
 		3065BC352B4474FA00D22200 /* MessageInputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputValidator.swift; sourceTree = "<group>"; };
 		306C41622B8AC45E00291EDF /* ListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItem.swift; sourceTree = "<group>"; };
-		306C41642B8AC5CD00291EDF /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		306C41682B8AC8FC00291EDF /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,8 +110,6 @@
 			children = (
 				3065BC022B4473B800D22200 /* SwiftDataSumpleApp.swift */,
 				3065BC042B4473B800D22200 /* ContentView.swift */,
-				306C41642B8AC5CD00291EDF /* DetailView.swift */,
-				306C41682B8AC8FC00291EDF /* ViewModel.swift */,
 				306C41622B8AC45E00291EDF /* ListItem.swift */,
 				3065BC062B4473B800D22200 /* Model.swift */,
 				3065BC2E2B44741100D22200 /* MessageSender.swift */,
@@ -282,9 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				306C41692B8AC8FC00291EDF /* ViewModel.swift in Sources */,
 				3065BC2F2B44741100D22200 /* MessageSender.swift in Sources */,
-				306C41652B8AC5CD00291EDF /* DetailView.swift in Sources */,
 				306C41632B8AC45E00291EDF /* ListItem.swift in Sources */,
 				3065BC052B4473B800D22200 /* ContentView.swift in Sources */,
 				3065BC312B44741E00D22200 /* CommonMessageAPI.swift in Sources */,

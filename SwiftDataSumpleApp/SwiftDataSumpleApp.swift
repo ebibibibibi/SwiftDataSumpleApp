@@ -13,9 +13,7 @@ struct SwiftDataSumpleApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = 
         Schema([
-            Person.self,
-            Community.self,
-            CommunityRelationship.self
+            Message.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {

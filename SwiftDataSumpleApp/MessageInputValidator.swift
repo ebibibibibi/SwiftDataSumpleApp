@@ -1,12 +1,12 @@
+////
+////  MessageInputValidator.swift
+////  SwiftDataSumpleApp
+////
+////  Created by TakahashiKotomi on 2024/01/03.
+////
 //
-//  MessageInputValidator.swift
-//  SwiftDataSumpleApp
+//import Foundation
 //
-//  Created by TakahashiKotomi on 2024/01/03.
-//
-
-import Foundation
-
 //struct MessageInputValidator {
 //    let messageType: MessageType
 //    let image: UIImage?

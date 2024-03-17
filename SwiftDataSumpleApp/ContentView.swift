@@ -9,17 +9,16 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    
     @Environment(\.modelContext) private var modelContext
-    @Query private var peaple: [Person]
-    @Query private var community: [Community]
-    @Query private var communityRelationship: [CommunityRelationship]
-    @State private var selection: Person?
+    @Query private var messages: [Message]
+    @State private var selection: Message?
     
     var body: some View {
         NavigationSplitView {
             List(selection: $selection) {
-                ForEach(peaple) { person in
-                    ListItem(person: person)
+                ForEach(messages) { message in
+                    MessageItem(message: message)
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -35,36 +34,22 @@ struct ContentView: View {
             }
         } 
     detail: {
-        if let selection = selection {
-            NavigationStack {
-                let community = community.filter { community in
-                    community.member.contains(where: { $0 == selection })
-                }
-                let communityRelationship = communityRelationship.filter { community in
-                    community.person1 == selection }
-                DetailView(person: selection, community: community, communityRelationship: communityRelationship)
-                }
-            }
-        }
-        .task {
-            if peaple.isEmpty {
-                Person.insertSampleData(modelContext: modelContext)
-            }
-        }
+        Text("こんにちは🐧")
+    }
     }
     private func addItem() {
         withAnimation {
             print("💐")
-//            let newItem = Item(timestamp: Date())
-//            modelContext.insert(newItem)
+            //            let newItem = Item(timestamp: Date())
+            //            modelContext.insert(newItem)
         }
     }
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             print("🌷")
-//            for index in offsets {
-//                modelContext.delete(items[index])
-//            }
+            //            for index in offsets {
+            //                modelContext.delete(items[index])
+            //            }
         }
     }
 }

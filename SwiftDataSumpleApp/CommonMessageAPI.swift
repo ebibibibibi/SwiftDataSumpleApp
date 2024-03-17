@@ -1,12 +1,12 @@
+////
+////  CommonMessageAPI.swift
+////  SwiftDataSumpleApp
+////
+////  Created by TakahashiKotomi on 2024/01/03.
+////
 //
-//  CommonMessageAPI.swift
-//  SwiftDataSumpleApp
+//import Foundation
 //
-//  Created by TakahashiKotomi on 2024/01/03.
-//
-
-import Foundation
-
 //final class CommonMessageAPI {
 //    // 全ての要素を取得する
 //    func fetchAll(ofUserId: Int, completion: @escaping ([Message]?) -> Void) {}
@@ -17,22 +17,22 @@ import Foundation
 //    // 画像メッセージを送信する
 //    func sendImageMessage(image: UIImage, text: String?, completion: @escaping (ImageMessage?) -> Void) {}
 //}
-
-/*
- メッセージの概念3つ
- - TextMassage
- - ImageMessage
- - OfficialMessage
- 
- メッセージを送信するという債務を持っている。
- - メッセージ送信の元となる入力値を保持し、その値をサーバに送信する
- - 通信結果を保持し、delegateに結果を伝える
- 
- 良い抽象化 =「複雑な実装詳細が隠蔽されてシンプルなインターフェイスが提供されていること」
- どのプロパティに依存しているか、明確に示されていないと影響範囲が定まらない。
-
- */
-
+//
+///*
+// メッセージの概念3つ
+// - TextMassage
+// - ImageMessage
+// - OfficialMessage
+// 
+// メッセージを送信するという債務を持っている。
+// - メッセージ送信の元となる入力値を保持し、その値をサーバに送信する
+// - 通信結果を保持し、delegateに結果を伝える
+// 
+// 良い抽象化 =「複雑な実装詳細が隠蔽されてシンプルなインターフェイスが提供されていること」
+// どのプロパティに依存しているか、明確に示されていないと影響範囲が定まらない。
+//
+// */
+//
 //final class MessageSender {
 //    private let api = CommonMessageAPI()
 //    let messageType: MessageType
