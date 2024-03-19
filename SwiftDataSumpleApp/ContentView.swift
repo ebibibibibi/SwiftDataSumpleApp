@@ -9,47 +9,49 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    
     @Environment(\.modelContext) private var modelContext
     @Query private var messages: [Message]
     @State private var selection: Message?
     
     var body: some View {
-        NavigationSplitView {
-            List(selection: $selection) {
-                ForEach(messages) { message in
-                    MessageItem(message: message)
+        
+        NavigationStack {
+            ZStack {
+                List {
+                    NavigationLink("子ビューに遷移", value: "CodeCandy")
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+                // 子ビューに遷移
+                .navigationDestination(for: String.self) { parentValue in
+                    
+                    HogeView(value: parentValue)
+                    
                 }
             }
-        } 
-    detail: {
-        Text("こんにちは🐧")
-    }
-    }
-    private func addItem() {
-        withAnimation {
-            print("💐")
-            //            let newItem = Item(timestamp: Date())
-            //            modelContext.insert(newItem)
+            .navigationTitle("親ビュー")
         }
     }
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            print("🌷")
-            //            for index in offsets {
-            //                modelContext.delete(items[index])
-            //            }
+}
+
+/// 遷移先の子ビューでもnavigationDestinationを定義可能
+/// 親ビュー側のnavigationDestinationと指定データ型が同じである場合、意図した遷移が発火しないため注意
+struct HogeView: View {
+    
+    var value: String
+    
+    var body: some View {
+        List {
+            NavigationLink("子ビューに遷移", value: 2023)
+        }
+        .navigationTitle("子ビュー")
+        // 子子ビューに遷移
+        .navigationDestination(for: Int.self) { childValue in
+            
+            VStack {
+                Text("\(childValue)年")
+                Text(value)
+            }
+            .font(.title)
+            .navigationTitle("子子ビュー")
         }
     }
 }
